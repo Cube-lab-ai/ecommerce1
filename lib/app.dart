@@ -1,3 +1,4 @@
+import 'package:ecom/utils/constatns/colors.dart';
 import 'package:ecom/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -74,6 +75,14 @@ class _HomescreenState extends State<Homescreen> {
             Container(height: 300, color: Colors.green),
             Container(height: 300, color: Colors.blue),
             Container(height: 300, color: Colors.orange),
+
+            Container(
+              height: 300,
+              decoration: BoxDecoration(
+                gradient: TColors.linearGradient, // <-- your gradient
+                borderRadius: BorderRadius.circular(16), // optional
+              ),
+            ),
           ],
         ),
       ),

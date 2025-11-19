@@ -46,4 +46,11 @@ class TColors {
   static const Color softGrey = Color(0xFFF4F4F4);
   static const Color lightGrey = Color(0xFFF9F9F9);
   static const Color white = Color(0xFFFFFFFF);
+
+  // gradient colors
+  static const Gradient linearGradient = LinearGradient(
+    begin: Alignment(0.0, 0.0),
+    end: Alignment(0.707, -0.707),
+    colors: [Color(0xffff9a9e), Color(0xfffad0c4), Color(0xfffad0c4)],
+  );
 }
