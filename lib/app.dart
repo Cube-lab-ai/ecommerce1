@@ -1,7 +1,4 @@
 import 'package:ecom/features/authentication/views/onboarding_screen.dart';
-import 'package:ecom/utils/constatns/image_string.dart';
-import 'package:ecom/utils/constatns/sizes.dart';
-import 'package:ecom/utils/constatns/text_strings.dart';
 import 'package:ecom/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -12,7 +9,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.dark,
       darkTheme: TAppTheme.darkTheme,
       theme: TAppTheme.lightTheme,
       home: Homescreen(),

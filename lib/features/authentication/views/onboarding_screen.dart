@@ -1,3 +1,4 @@
+import 'package:ecom/features/authentication/controllers/on_boarding_controller.dart';
 import 'package:ecom/utils/constatns/colors.dart';
 import 'package:ecom/utils/constatns/image_string.dart';
 import 'package:ecom/utils/constatns/sizes.dart';
@@ -5,6 +6,7 @@ import 'package:ecom/utils/constatns/text_strings.dart';
 import 'package:ecom/utils/device/device_utility.dart';
 import 'package:ecom/utils/helper_function/helper_function.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Homescreen extends StatefulWidget {
@@ -16,10 +18,11 @@ class Homescreen extends StatefulWidget {
 
 class _HomescreenState extends State<Homescreen> {
   late PageController _pageController;
-
+  late OnBoardingController _onBoardingController;
   @override
   void initState() {
-    _pageController = PageController();
+    _onBoardingController = Get.put(OnBoardingController());
+    _pageController = _onBoardingController.pagecontroller;
     super.initState();
   }
 
@@ -35,6 +38,9 @@ class _HomescreenState extends State<Homescreen> {
       body: Stack(
         children: [
           PageView(
+            onPageChanged: (value) {
+              _onBoardingController.updatePageIndigator(value);
+            },
             controller: _pageController,
             children: [
               OnBoardingWidgets(
@@ -56,34 +62,64 @@ class _HomescreenState extends State<Homescreen> {
           ),
 
           // skip button
-          SkipButtonWidget(pageController: _pageController),
+          SkipButtonWidget(),
 
           // smooth page indigator package
-          SmoothPageIndigator(pageController: _pageController),
+          SmoothPageIndigator(),
+
+          // next button
+          NextButtonWidget(),
         ],
       ),
     );
   }
 }
 
-class SmoothPageIndigator extends StatelessWidget {
-  const SmoothPageIndigator({super.key, required PageController pageController})
-    : _pageController = pageController;
-
-  final PageController _pageController;
+class NextButtonWidget extends StatelessWidget {
+  const NextButtonWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = OnBoardingController.instence;
+    bool isDark = THelperFunctions.isDarkMode(context);
+    return Positioned(
+      bottom: TDeviceUtils.getBottomNavigationBarHeight() + 25,
+      right: TSizes.defaultSpace,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: CircleBorder(),
+          backgroundColor: isDark
+              ? Theme.of(context).primaryColor
+              : TColors.dark,
+        ),
+        onPressed: () {
+          controller.nextPage();
+        },
+        child: Icon(Icons.arrow_forward_ios_sharp),
+      ),
+    );
+  }
+}
+
+class SmoothPageIndigator extends StatelessWidget {
+  const SmoothPageIndigator({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final _pageController = OnBoardingController.instence;
     final bool dark = THelperFunctions.isDarkMode(context);
     return Positioned(
       left: TSizes.defaultSpace,
       bottom: TDeviceUtils.getBottomNavigationBarHeight() + 25,
       child: SmoothPageIndicator(
+        onDotClicked: (index) {
+          _pageController.dotNavigationClicked(index);
+        },
         effect: ExpandingDotsEffect(
           activeDotColor: dark ? TColors.light : TColors.dark,
           dotHeight: 6,
         ),
-        controller: _pageController,
+        controller: _pageController.pagecontroller,
         count: 3,
       ),
     );
@@ -91,23 +127,22 @@ class SmoothPageIndigator extends StatelessWidget {
 }
 
 class SkipButtonWidget extends StatelessWidget {
-  const SkipButtonWidget({super.key, required PageController pageController})
-    : _pageController = pageController;
-
-  final PageController _pageController;
+  const SkipButtonWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final _pageController = OnBoardingController.instence;
     return Positioned(
       top: TDeviceUtils.getAppBarHeight(),
       right: TSizes.defaultSpace,
       child: OutlinedButton(
         onPressed: () {
-          _pageController.jumpToPage(2);
+          _pageController.skipPage(2);
         },
         child: Text('Skip'),
       ),
     );
+    ;
   }
 }
 
@@ -151,7 +186,7 @@ class OnBoardingWidgets extends StatelessWidget {
           onPressed: () {
             controller.nextPage(
               duration: Duration(milliseconds: 300),
-              curve: Curves.bounceIn,
+              curve: Curves.easeInCubic,
             );
           },
           child: Text('Next'),
