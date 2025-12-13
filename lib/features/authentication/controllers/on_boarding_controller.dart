@@ -19,6 +19,10 @@ class OnBoardingController extends GetxController {
 
   void nextPage() {
     currentPageIndex.value += 1;
+    if (currentPageIndex.value == 3) {
+      Get.to(() => LoginScreen());
+      return;
+    }
     pagecontroller.nextPage(
       duration: Duration(seconds: 1),
       curve: Curves.bounceIn,

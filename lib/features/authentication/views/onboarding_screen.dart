@@ -181,16 +181,6 @@ class OnBoardingWidgets extends StatelessWidget {
         ),
 
         SizedBox(height: TSizes.spaceBtwSections),
-
-        ElevatedButton(
-          onPressed: () {
-            controller.nextPage(
-              duration: Duration(milliseconds: 300),
-              curve: Curves.easeInCubic,
-            );
-          },
-          child: Text('Next'),
-        ),
       ],
     );
   }

@@ -1,5 +1,6 @@
+import 'package:ecom/common/loginin_signup_widget/form_divider_widget.dart';
+import 'package:ecom/common/loginin_signup_widget/social_button.dart';
 import 'package:ecom/common/styles/spacing_styles.dart';
-import 'package:ecom/utils/constatns/colors.dart';
 import 'package:ecom/utils/constatns/image_string.dart';
 import 'package:ecom/utils/constatns/sizes.dart';
 import 'package:ecom/utils/constatns/text_strings.dart';
@@ -41,107 +42,83 @@ class LoginScreen extends StatelessWidget {
 
             SizedBox(height: TSizes.spaceBtwSections),
 
-            Form(
-              child: Column(
-                children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Iconsax.direct_right),
-                      labelText: TTexts.email,
-                    ),
-                  ),
+            LoginFormWidget(),
 
-                  const SizedBox(height: TSizes.spaceBtwInputFields),
-
-                  TextFormField(
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Iconsax.password_check),
-                      suffixIcon: Icon(Iconsax.eye),
-                    ),
-                  ),
-
-                  const SizedBox(height: TSizes.spaceBtwInputFields / 2),
-
-                  // remember me and forgot password
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Checkbox(value: false, onChanged: (value) {}),
-                          Text(TTexts.rememberMe),
-                        ],
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(TTexts.forgetPassword),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: TSizes.spaceBtwSections),
-
-                  SizedBox(
-                    height: 50,
-
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text(TTexts.signIn),
-                    ),
-                  ),
-
-                  const SizedBox(height: TSizes.spaceBtwItems),
-
-                  SizedBox(
-                    height: 50,
-
-                    width: double.infinity,
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      child: Text(TTexts.createAccount),
-                    ),
-                  ),
-
-                  const SizedBox(height: TSizes.spaceBtwSections),
-                ],
-              ),
-            ),
-
-            Row(
-              children: [
-                Flexible(
-                  child: Divider(
-                    indent: 60,
-                    thickness: 0.5,
-                    endIndent: 6,
-                    color: isdark ? TColors.lightGrey : TColors.darkGrey,
-                  ),
-                ),
-                Text(TTexts.orSignInWith),
-                Flexible(
-                  child: Divider(
-                    indent: 6,
-                    endIndent: 60,
-                    thickness: 0.5,
-
-                    color: isdark ? TColors.lightGrey : TColors.darkGrey,
-                  ),
-                ),
-              ],
-            ),
+            FormDividerWidget(isdark: isdark),
 
             SizedBox(height: TSizes.spaceBtwSections),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(width: 50, TImages.google),
-                Image.asset(width: 50, TImages.facebook),
-              ],
-            ),
+            SocialButtonWidget(isdark: isdark),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class LoginFormWidget extends StatelessWidget {
+  const LoginFormWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      child: Column(
+        children: [
+          TextFormField(
+            decoration: InputDecoration(
+              prefixIcon: Icon(Iconsax.direct_right),
+              labelText: TTexts.email,
+            ),
+          ),
+
+          const SizedBox(height: TSizes.spaceBtwInputFields),
+
+          TextFormField(
+            decoration: InputDecoration(
+              prefixIcon: Icon(Iconsax.password_check),
+              suffixIcon: Icon(Iconsax.eye),
+            ),
+          ),
+
+          const SizedBox(height: TSizes.spaceBtwInputFields / 2),
+
+          // remember me and forgot password
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Checkbox(value: false, onChanged: (value) {}),
+                  Text(TTexts.rememberMe),
+                ],
+              ),
+              TextButton(onPressed: () {}, child: Text(TTexts.forgetPassword)),
+            ],
+          ),
+
+          const SizedBox(height: TSizes.spaceBtwItems),
+
+          SizedBox(
+            height: 50,
+
+            width: double.infinity,
+            child: ElevatedButton(onPressed: () {}, child: Text(TTexts.signIn)),
+          ),
+
+          const SizedBox(height: TSizes.spaceBtwItems),
+
+          SizedBox(
+            height: 50,
+
+            width: double.infinity,
+            child: OutlinedButton(
+              onPressed: () {},
+              child: Text(TTexts.createAccount),
+            ),
+          ),
+
+          const SizedBox(height: TSizes.spaceBtwSections),
+        ],
       ),
     );
   }
