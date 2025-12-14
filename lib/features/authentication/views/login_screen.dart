@@ -1,11 +1,13 @@
 import 'package:ecom/common/loginin_signup_widget/form_divider_widget.dart';
 import 'package:ecom/common/loginin_signup_widget/social_button.dart';
 import 'package:ecom/common/styles/spacing_styles.dart';
+import 'package:ecom/features/authentication/views/register_screen.dart';
 import 'package:ecom/utils/constatns/image_string.dart';
 import 'package:ecom/utils/constatns/sizes.dart';
 import 'package:ecom/utils/constatns/text_strings.dart';
 import 'package:ecom/utils/helper_function/helper_function.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:iconsax/iconsax.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -77,6 +79,7 @@ class LoginFormWidget extends StatelessWidget {
             decoration: InputDecoration(
               prefixIcon: Icon(Iconsax.password_check),
               suffixIcon: Icon(Iconsax.eye),
+              labelText: TTexts.password,
             ),
           ),
 
@@ -89,6 +92,7 @@ class LoginFormWidget extends StatelessWidget {
               Row(
                 children: [
                   Checkbox(value: false, onChanged: (value) {}),
+
                   Text(TTexts.rememberMe),
                 ],
               ),
@@ -109,10 +113,11 @@ class LoginFormWidget extends StatelessWidget {
 
           SizedBox(
             height: 50,
-
             width: double.infinity,
             child: OutlinedButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(RegisterScreen());
+              },
               child: Text(TTexts.createAccount),
             ),
           ),
