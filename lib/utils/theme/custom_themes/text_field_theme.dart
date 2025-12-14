@@ -66,7 +66,7 @@ class TTextFormFieldTheme {
       fontFamily: 'Urbanist',
     ),
     floatingLabelStyle: const TextStyle().copyWith(
-      color: TColors.white.withOpacity(0.8),
+      color: TColors.white.withValues(alpha: 0.8),
       fontFamily: 'Urbanist',
     ),
     border: const OutlineInputBorder().copyWith(

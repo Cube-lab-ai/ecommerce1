@@ -1,0 +1,76 @@
+// By default, PageView in Flutter does try to take all the space available from its parent, but whether it actually fills the screen depends on how it’s constrained.
+// ✅ When PageView takes full space
+// PageView will fill the screen if its parent gives it bounded constraints, for example:
+Scaffold(
+  body: PageView(
+    children: [
+      Container(color: Colors.red),
+      Container(color: Colors.blue),
+    ],
+  ),
+);
+// ✔ Here, Scaffold.body provides full screen constraints → PageView fills the screen.
+
+⚠️ When PageView does NOT take full space
+If PageView is inside a widget that does not give it a fixed height, it won’t expand properly.
+Common problematic cases:
+Column(
+  children: [
+    PageView(   // ❌ height is unbounded
+      children: [...],
+    ),
+  ],
+);
+
+This will cause layout issues or errors like:
+
+Vertical viewport was given unbounded height
+
+✅ Correct way inside Column, Row, etc.
+Wrap it with Expanded or SizedBox:
+
+Column(
+  children: [
+    Expanded(
+      child: PageView(
+        children: [...],
+      ),
+    ),
+  ],
+);
+
+
+Bounded vs Unbounded (easy example)
+✅ Bounded
+SizedBox(
+  height: 300,
+  child: PageView(...),
+);
+Here:
+
+Height is bounded (max = 300)
+PageView knows exactly how tall it can be
+
+
+❌ Unbounded
+Column(
+  children: [
+    PageView(...),
+  ],
+);
+
+
+Here:
+
+Column does NOT tell its children how tall they can be
+Height is unbounded (infinite)
+PageView doesn’t know how much vertical space to use
+Result → Flutter throws:
+
+Vertical viewport was given unbounded height
+Why this happens
+
+Some widgets (like Column, ListView, SingleChildScrollView) let their children be as tall as they want.
+But scrollable widgets (PageView, ListView, GridView) require a bounded size so they know:
+how much content to show
+how scrolling should work

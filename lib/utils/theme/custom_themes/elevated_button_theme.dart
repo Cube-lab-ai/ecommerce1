@@ -7,11 +7,11 @@ class TElevatedButtonTheme {
         style: ElevatedButton.styleFrom(
           elevation: 0,
           foregroundColor: Colors.white,
-          backgroundColor: Colors.blue,
+          backgroundColor: Color(0xFF4b68ff),
           disabledBackgroundColor: Colors.grey,
           disabledForegroundColor: Colors.grey,
           shape: RoundedRectangleBorder(
-            side: BorderSide(color: Colors.blue),
+            side: BorderSide(color: Color(0xFF4b68ff)),
             borderRadius: BorderRadius.circular(12),
           ),
           textStyle: TextStyle(
@@ -28,11 +28,11 @@ class TElevatedButtonTheme {
         style: ElevatedButton.styleFrom(
           elevation: 0,
           foregroundColor: Colors.white,
-          backgroundColor: Colors.blue,
+          backgroundColor: Color(0xFF4b68ff),
           disabledBackgroundColor: Colors.grey,
           disabledForegroundColor: Colors.grey,
           shape: RoundedRectangleBorder(
-            side: BorderSide(color: Colors.blue),
+            side: BorderSide(color: Color(0xFF4b68ff)),
             borderRadius: BorderRadius.circular(12),
           ),
           textStyle: TextStyle(

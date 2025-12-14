@@ -1,0 +1,111 @@
+
+class MyWidget extends StatefulWidget {
+  const MyWidget({super.key});
+
+  @override
+  State<MyWidget> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
+
+
+
+🔹 What happens when createState() is called?
+Step-by-step:
+
+Flutter sees a StatefulWidget
+
+Calls createState()
+
+A State object is created
+
+Flutter attaches that State to the widget
+
+Then lifecycle continues with initState()
+
+
+MyWidget (Widget)
+   ↓ createState()
+_MyWidgetState (State)
+   ↓ initState()
+
+
+🔹 Important Facts About createState()
+
+✔ Called once when widget is inserted into the widget tree
+✔ Returns a new State instance
+✔ Does NOT have BuildContext
+✔ Should contain no logic
+
+---------------------------------------------------------------
+
+❌ What NOT to do in createState()
+@override
+_MyWidgetState createState() {
+  fetchApi(); // ❌ WRONG
+  return _MyWidgetState();
+}
+
+
+Why?
+
+State is not initialized yet
+
+Context not available
+
+----------------------------------------------------------------
+✅ Correct Example
+class Counter extends StatefulWidget {
+  @override
+  _CounterState createState() => _CounterState();
+}
+
+class _CounterState extends State<Counter> {
+  int count = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    print("initState called");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Text('$count');
+  }
+}
+
+// flow 
+
+createState()
+   ↓
+initState()
+   ↓
+build()
+
+
+🔹 Simple Analogy 🧠
+
+Think of a TV 📺:
+
+StatefulWidget → TV model (fixed)
+
+createState() → plug in power
+
+State → remote control (changes channels)
+
+build() → screen display
+
+
+-------------------------------------------
+| Method          | Purpose              | Called     |
+| --------------- | -------------------- | ---------- |
+| `createState()` | Creates State object | Once       |
+| `initState()`   | Initialize logic     | Once       |
+| `build()`       | Build UI             | Many times |
