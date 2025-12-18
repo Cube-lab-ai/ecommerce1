@@ -1,3 +1,4 @@
+// uses label
 import 'package:ecom/utils/constatns/image_string.dart';
 import 'package:ecom/utils/constatns/sizes.dart';
 import 'package:ecom/utils/constatns/text_strings.dart';

@@ -1,3 +1,5 @@
+// uses body small , body medium
+
 import 'package:ecom/utils/constatns/colors.dart';
 import 'package:ecom/utils/constatns/text_strings.dart';
 import 'package:flutter/material.dart';

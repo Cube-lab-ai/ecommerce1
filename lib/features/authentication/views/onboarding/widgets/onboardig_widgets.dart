@@ -27,6 +27,7 @@ class OnBoardingWidgets extends StatelessWidget {
           height: height * 0.5,
           fit: BoxFit.contain,
         ),
+
         SizedBox(height: TSizes.spaceBtwItems),
 
         Text(
