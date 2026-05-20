@@ -43,7 +43,6 @@ flutter:
   assets:
     - assets/images/animations/
     - assets/images/content/
-    - assets/icons/payment_methods
     - assets/logos/
     - assets/icons/
 
